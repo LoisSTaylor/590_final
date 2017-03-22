@@ -1,0 +1,36 @@
+---
+title: "GEOL590 final project proposal"
+author: "L. Stacy Taylor"
+date: "March 22, 2017"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## Introduction: CDD and CDH
+
+My research involves pulling data from the weather station (located at the UT gardens) in order to calculate Cumulative Degree Hours (CDH).  This calculation is based off what is often used in horticulture as Cumulative Degree Days (CDD).  CDD takes an average of temperatures taken 12 hours hours apart, with the low temperature not allowed to drop below an "effective zero metabolic temperature" for the organism under study; these average values are then added on a daily basis from an arbitrary zero point specified by the beginning of the experiment.  The purpose of this is that often plants respond to cumulative amounts of temperature above a certain threshold value to influence growth patterns.  When choosing a sampling strategy over a time period of changing temperature, the calculation of the CDD effectively changes time to a function of temperature trend and sampling can occur based on similar temperature intervals rather than similar time intervals.
+
+In the instance of decomposition studies, it is known that microbial growth rates are a function of temperature (among others) and it has been shown that the CDD is reasonable benchmark for choice of sampling strategy when sampling is carried out over more than one season.  Finer resolution can be obtained by electing to use CDH in which case several values of temperature are averaged over a day.
+
+##Proposal for calcuation of CDH
+**Purpose of Project:**
+My research relies upon a decomposition sampling strategy that spans a year in time. With a fixed budget, and therefore fixed amount of 16s rDNA sampling that occur, and sampliing strategy must be devised whereby it is possible to calculate how many samples can be obtained over the course of a year, and at what CDH resolution those samples can occur.  From there revisions can be made to the experiment as necessary. Variables of note that will be accounted for in the R code include: user entry of beginning and ending sampling dates, user entry of CDH hour resolution, user entry of low temperature threshold, creation of CDH column of data, and user entry of sampling frequency.
+
+This proposal is currently in the form of a data analysis project.  While it is quite possible to build a reasonably sophisticated set of functions to model a variety of input variables, my level of R programming may not quite be up to that challenge just yet.  If, however, this project develops smoothly and it is possible to attempt the function coding, then I will request a proposal resubmit and turn this project into a package.
+
+**Partipants involved:** L. Stacy Taylor
+
+**Project type:** data analysis
+
+**Git workflow:** non-distributed
+
+**Data source:** http://bioengr.ag.utk.edu/weather/ Specific weather data will be used from the 2014 and 2015 files which can be downloaded as Excel files.
+
+**Specifications and deliverables:** Final data output will be provided as the following:
+
+1) Graphs illustrating sampling strategy as a function of time, and relationships between date, temperature, CDH, and sampling strategy.
+
+2) Charts of sampling strategy and proposed dates for sampling based on user input.
