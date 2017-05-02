@@ -6,7 +6,7 @@ output: html_document
 ---
 
 ```{r setup, include=FALSE}
-knitr::opts_chunk$set(echo = TRUE)
+knitr::opts_chunk$set(echo = FALSE)
 ```
 
 ## Introduction to the Standard Operating Procedure (SOP):
@@ -19,14 +19,14 @@ This project involves downloading data from a weather station located at the UT 
 The Cumulative Degree Hour Standard Operating Procedure (CDH SOP) follows below in a paragraph-documented cookbook style format.  Additionally, there are several points where it is possible to extract internally created dataframes in the event that it is preferable to look at the data during individual steps in the calculation sequence.
 
 ## The CDH SOP:
-##Step 1: Setup
+**Step 1: Setup**
 Download the following test data file that is provided with this markdown document: *Weather2013_15.csv*.  
 
 **Note:** If actual Excel spreadsheet data from a weather station is to be utilized, there are some important adjustments to be made to the Excel data prior to use. Spreadsheet files must have any headers removed except column titles.  Column titles of interest must read: Year, Julian_day, Hr.Min, and Ambient. Title rows must be unfrozen.  If there is a column entitled ID, this title must be changed prior to conversion to .csv file formatting, otherwise the file formatting does not happen correctly (this is an Excel quirk).  Finally, resulting data must be saved as a .csv file.
 
 Ensure that the *tidyverse* and *lubridate* packages are installed.  These packages are required to run this code.
 
-##Step 2: Downloading data and initial dataframe creation
+**Step 2: Downloading data and initial dataframe creation**
 The following code loads the *tidyverse* and *lubridate* libraries, reads the data file, and creates a dataframe entitled *weatherdata* that contains four columns of data: Year, Julian_day, Hr.Min, Ambient. This dataframe is large and can be printed to the screen by removing the # prior to the final print statement, but will not automatically print here in the interests of brevity. 
 
 **Note:** if another file has been created for use, it will need to be entered in the 3rd line: *read.csv(file="enter_new_filename_here.csv")*
@@ -48,7 +48,7 @@ weather1 <- mutate(weatherdata,
       date = as.Date(Julian_day, origin.date))
 #print(weather1)#in order to view weather1, remove initial #sign
 ```
-##Step 3: Initial Data entry  
+**Step 3: Initial Data entry**  
 1. Choose a date range and enter it in the first and second lines between the quotes in the first filter statement  *date >= ymd("2014-06-01") &  date <=ymd("2015-06-01")*.  The first line contains the starting date, and the second line contains the ending date. Formatting is in the form of "YYYY-MM-DD" **Note:** the dates listed will be included in the date range selected.
 
 2. Choose the times at which temperature readings will be taken (100 and 1300 here) and enter these values into the third line *(Hr.Min==XX00)*. Generally this is done at 12-hour intervals at the estimated highest and lowest points of the day.
@@ -65,7 +65,7 @@ weather2[weather2<0]=0
 #print(weather2)#in order to view weather2, remove initial #sign
 
 ```
-##Step 4: Calculations
+**Step 4: Calculations**
 The following calculates daily means of the Ambient temperatures chosen above by the hourly selections from Step 3, number 2. A new dataframe is created *(calc_CDH)* that contains these means in a column entitled DH (degree hours).  A final column, CDH (cumulative degree hours), is a running daily sum of values in the DH column.
 ```{r, echo=TRUE}
 calc_CDH <- weather2 %>%
@@ -80,7 +80,7 @@ DHsum <- sum(calc_CDH$DH)
 print(DHsum)
 ```
 
-##Step 5: Final data entry
+**Step 5: Final data entry**
 1. Enter the total number of samples that will be taken, here there are 11. *sample_rate<-XX* 
 ```{r, echo=TRUE}
 sample_rate <- 11
@@ -110,7 +110,7 @@ for (i in 1:10) {
 }
 ```
 
-##Data outputs 
+**Data outputs** 
 *Calculated Sampling Schedule*
 The following table 
 
@@ -130,7 +130,7 @@ date_by_CDH <- ggplot(data=sample_schedule, mapping=aes(x=CDH, y=date)) + geom_p
 print(date_by_CDH)
 ```
 
-##Discussion
+**Discussion**
 
 **Errors**
 
