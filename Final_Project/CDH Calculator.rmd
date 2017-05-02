@@ -21,7 +21,7 @@ The Cumulative Degree Hour Standard Operating Procedure (CDH SOP) follows below 
 
 ## The CDH SOP:
 **Step 1: Setup**
-Download the following test data file that is provided with this markdown document: *Weather2013_15.csv*.  
+Download the following test data file that is provided with this markdown document: `Weather2013_15.csv`.  
 
 **Note:** If actual Excel spreadsheet data from a weather station is to be utilized, there are some important adjustments to be made to the Excel data prior to use. Spreadsheet files must have any headers removed except column titles.  Column titles of interest must read: Year, Julian_day, Hr.Min, and Ambient. Title rows must be unfrozen.  If there is a column entitled ID, this title must be changed prior to conversion to .csv file formatting, otherwise the file formatting does not happen correctly (this is an Excel quirk).  Finally, resulting data must be saved as a .csv file.
 
@@ -30,7 +30,7 @@ Ensure that the *tidyverse* and *lubridate* packages are installed.  These packa
 **Step 2: Downloading data and initial dataframe creation**
 The following code loads the *tidyverse* and *lubridate* libraries, reads the data file, and creates a dataframe entitled *weatherdata* that contains four columns of data: Year, Julian_day, Hr.Min, Ambient. This dataframe is large and can be printed to the screen by removing the # prior to the final print statement, but will not automatically print here in the interests of brevity. 
 
-**Note:** if another file has been created for use, it will need to be entered in the 3rd line: *read.csv(file="enter_new_filename_here.csv")*
+**Note:** if another file has been created for use, it will need to be entered in the 3rd line: `read.csv(file="enter_new_filename_here.csv")`
 ```{r, echo=TRUE}
 suppressMessages(library(tidyverse))
 suppressMessages(library(lubridate))
@@ -50,11 +50,11 @@ weather1 <- mutate(weatherdata,
 #print(weather1)#in order to view weather1, remove initial #sign
 ```
 **Step 3: Initial Data entry**  
-1. Choose a date range and enter it in the first and second lines between the quotes in the first filter statement  *date >= ymd("2014-06-01") &  date <=ymd("2015-06-01")*.  The first line contains the starting date, and the second line contains the ending date. Formatting is in the form of "YYYY-MM-DD" **Note:** the dates listed will be included in the date range selected.
+1. Choose a date range and enter it in the first and second lines between the quotes in the first filter statement  `date >= ymd("2014-06-01") &  date <=ymd("2015-06-01")`.  The first line contains the starting date, and the second line contains the ending date. Formatting is in the form of "YYYY-MM-DD" **Note:** the dates listed will be included in the date range selected.
 
-2. Choose the times at which temperature readings will be taken (100 and 1300 here) and enter these values into the third line *(Hr.Min==XX00)*. Generally this is done at 12-hour intervals at the estimated highest and lowest points of the day.
+2. Choose the times at which temperature readings will be taken (100 and 1300 here) and enter these values into the third line `(Hr.Min==XX00)`. Generally this is done at 12-hour intervals at the estimated highest and lowest points of the day.
 
-3. Choose the low temperature threshold.  All values below this choice will be reset to the selcted value, in this case 0. *weather2[weather2<0]=X*
+3. Choose the low temperature threshold.  All values below this choice will be reset to the selcted value, in this case 0. `weather2[weather2<0]=X`
 
 ```{r, echo=TRUE}
 weather2 <- filter(weather1, date >= ymd("2014-06-01") &
@@ -82,7 +82,7 @@ print(DHsum)
 ```
 
 **Step 5: Final data entry**
-1. Enter the total number of samples that will be taken, here there are 11. *sample_rate<-XX* 
+1. Enter the total number of samples that will be taken, here there are 11. `sample_rate<-XX` 
 ```{r, echo=TRUE}
 sample_rate <- 11
 ```
@@ -93,9 +93,9 @@ sample_interval_size <- DHsum/(sample_rate-1)
 print(sample_interval_size)
 ```
 2. In the start_row line, change the date within the quotes to equal the starting date used in Step 3, number 1, above.  The format will be YYYY-MM-DD.
-*start_row <- filter(calc_CDH, date=="YYYY-MM-DD")*
+`start_row <- filter(calc_CDH, date=="YYYY-MM-DD")`
 
-3. In the for statement below, enter the value for *sample rate-1* used above (in this case, 10).  *for(i in 1:XX)*
+3. In the for statement below, enter the value for *sample rate-1* used above (in this case, 10).  `for(i in 1:XX)`
 
 This code creates a new dataframe entitled *sample_schedule*.  It uses the sample interval size (obtained above), and for each integer multiple of the interval size it returns the last closest value of the CDH.  These CDH values are then used to select rows from the *calc_CDH* dataframe from step 4 and these rows are then bound together into the new dataframe.  
 ```{r, echo=TRUE}

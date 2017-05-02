@@ -40,7 +40,7 @@ The CDH SOP:
 ------------
 
 **Step 1: Setup** Download the following test data file that is provided
-with this markdown document: *Weather2013\_15.csv*.
+with this markdown document: `Weather2013_15.csv`.
 
 **Note:** If actual Excel spreadsheet data from a weather station is to
 be utilized, there are some important adjustments to be made to the
@@ -64,8 +64,7 @@ prior to the final print statement, but will not automatically print
 here in the interests of brevity.
 
 **Note:** if another file has been created for use, it will need to be
-entered in the 3rd line:
-*read.csv(file="enter\_new\_filename\_here.csv")*
+entered in the 3rd line: `read.csv(file="enter_new_filename_here.csv")`
 
     suppressMessages(library(tidyverse))
     suppressMessages(library(lubridate))
@@ -95,20 +94,20 @@ will not automatically print here in the interests of brevity.
 
 **Step 3: Initial Data entry**  
 1. Choose a date range and enter it in the first and second lines
-between the quotes in the first filter statement *date &gt;=
-ymd("2014-06-01") & date &lt;=ymd("2015-06-01")*. The first line
+between the quotes in the first filter statement
+`date >= ymd("2014-06-01") &  date <=ymd("2015-06-01")`. The first line
 contains the starting date, and the second line contains the ending
 date. Formatting is in the form of "YYYY-MM-DD" **Note:** the dates
 listed will be included in the date range selected.
 
 1.  Choose the times at which temperature readings will be taken (100
     and 1300 here) and enter these values into the third line
-    *(Hr.Min==XX00)*. Generally this is done at 12-hour intervals at the
+    `(Hr.Min==XX00)`. Generally this is done at 12-hour intervals at the
     estimated highest and lowest points of the day.
 
 2.  Choose the low temperature threshold. All values below this choice
     will be reset to the selcted value, in this case 0.
-    *weather2\[weather2&lt;0\]=X*
+    `weather2[weather2<0]=X`
 
 <!-- -->
 
@@ -158,7 +157,7 @@ value for cumulative degree hours for the entire study range.
     ## [1] 5567.616
 
 **Step 5: Final data entry** 1. Enter the total number of samples that
-will be taken, here there are 11. *sample\_rate&lt;-XX*
+will be taken, here there are 11. `sample_rate<-XX`
 
     sample_rate <- 11
 
@@ -172,11 +171,10 @@ If this interval is too high or too low, adjust the sample rate above.
 
 1.  In the start\_row line, change the date within the quotes to equal
     the starting date used in Step 3, number 1, above. The format will
-    be YYYY-MM-DD. *start\_row &lt;-
-    filter(calc\_CDH, date=="YYYY-MM-DD")*
+    be YYYY-MM-DD. `start_row <- filter(calc_CDH, date=="YYYY-MM-DD")`
 
 2.  In the for statement below, enter the value for *sample rate-1* used
-    above (in this case, 10). *for(i in 1:XX)*
+    above (in this case, 10). `for(i in 1:XX)`
 
 This code creates a new dataframe entitled *sample\_schedule*. It uses
 the sample interval size (obtained above), and for each integer multiple
