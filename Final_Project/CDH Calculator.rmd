@@ -2,11 +2,12 @@
 title: 'Geology 590 Final Project: Determination of Cumulative Degree Hours (CDH)'
 author: "L. Stacy Taylor"
 date: "April 30, 2017"
-github_document: default
+output: md_document
 ---
 
 ```{r setup, include=FALSE}
-knitr::opts_chunk$set(echo = FALSE)
+# github_document: default
+knitr::opts_chunk$set(echo = TRUE)
 ```
 
 ## Introduction to the Standard Operating Procedure (SOP):
@@ -114,7 +115,7 @@ for (i in 1:10) {
 *Calculated Sampling Schedule*
 The following table 
 
-```{r, echo=FALSE}
+```{r sample_schedule_plot, echo=FALSE}
 print(sample_schedule)
 ```
 Degree Hours by Date Within Sampling Timeframe
