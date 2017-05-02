@@ -2,7 +2,7 @@
 title: 'Geology 590 Final Project: Determination of Cumulative Degree Hours (CDH)'
 author: "L. Stacy Taylor"
 date: "April 30, 2017"
-output: html_document
+github_document: default
 ---
 
 ```{r setup, include=FALSE}
